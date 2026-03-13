@@ -1,0 +1,14 @@
+.DS_Store
+# Dev screenshots from build process
+ss*.png
+ss2_*.png
+ss3_*.png
+ss4_*.png
+screenshot*.png
+section_*.png
+# Reference/source files
+ritzbarbershop.ca_*
+IMG_6403.MOV
+# Original files with messy filenames (clean copies already in repo)
+I fresh Logo.jpg
+Screenshot 2026-03-12*

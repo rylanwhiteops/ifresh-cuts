@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iFresh Cuts — Premium Barbershop | Hamilton, ON</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              50:  '#fdf8e7',
+              100: '#f9edbe',
+              200: '#f3d97e',
+              300: '#edca4e',
+              400: '#e8bc2a',
+              500: '#c9a535',
+              600: '#a8871e',
+              700: '#856914',
+              800: '#5e4b0e',
+              900: '#3a2e09',
+            },
+            dark: {
+              50:  '#2a2a2a',
+              100: '#1e1e1e',
+              200: '#161616',
+              300: '#111111',
+              400: '#0d0d0d',
+              500: '#0a0a0a',
+            }
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body:    ['Outfit', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #0a0a0a;
+      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── Gold shimmer text ── */
+    .gold-text {
+      background: linear-gradient(135deg, #c9a535 0%, #f3d97e 40%, #e8bc2a 60%, #a8871e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gold-shimmer {
+      background: linear-gradient(90deg, #c9a535 0%, #f3d97e 25%, #edca4e 50%, #f3d97e 75%, #c9a535 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer {
+      0%   { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    /* ── Navbar ── */
+    #navbar {
+      transition: background 0.4s ease, backdrop-filter 0.4s ease;
+    }
+    #navbar.scrolled {
+      background: rgba(10, 10, 10, 0.95) !important;
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(201, 165, 53, 0.2);
+    }
+
+    /* ── Hero video panel ── */
+    .hero-wrap {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+    }
+    .video-panel {
+      position: absolute;
+      inset: 0;
+      display: flex;
+    }
+    .video-col {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    .video-col video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.55) contrast(1.05);
+    }
+    /* thin gold dividers between panels */
+    .video-col:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 1px; height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(201,165,53,0.6) 30%, rgba(201,165,53,0.6) 70%, transparent);
+      z-index: 2;
+    }
+    /* rich dark vignette overlay */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.55) 100%),
+        linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.7) 100%);
+      z-index: 3;
+    }
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* ── Gold divider line ── */
+    .gold-line {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #c9a535, transparent);
+      margin: 0 auto;
+    }
+    .gold-line-full {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,165,53,0.4) 30%, rgba(201,165,53,0.4) 70%, transparent);
+    }
+
+    /* ── Section headings ── */
+    .section-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #c9a535;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    /* ── Service cards ── */
+    .service-card {
+      background: linear-gradient(145deg, #161616, #111111);
+      border: 1px solid rgba(201,165,53,0.15);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #c9a535, transparent);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+    .service-card:hover {
+      border-color: rgba(201,165,53,0.45);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(201,165,53,0.12);
+    }
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    /* ── CTA buttons ── */
+    .btn-gold {
+      display: inline-block;
+      padding: 0.85rem 2.5rem;
+      background: linear-gradient(135deg, #c9a535, #e8bc2a, #a8871e);
+      background-size: 200% auto;
+      color: #0a0a0a;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background-position 0.4s ease, box-shadow 0.3s ease, transform 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-gold:hover {
+      background-position: right center;
+      box-shadow: 0 0 30px rgba(201,165,53,0.5), 0 8px 24px rgba(0,0,0,0.4);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      display: inline-block;
+      padding: 0.85rem 2.5rem;
+      border: 1px solid rgba(201,165,53,0.6);
+      color: #c9a535;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      background: transparent;
+    }
+    .btn-outline:hover {
+      background: rgba(201,165,53,0.1);
+      border-color: #c9a535;
+      box-shadow: 0 0 20px rgba(201,165,53,0.2);
+    }
+
+    /* ── Review cards ── */
+    .review-card {
+      background: linear-gradient(145deg, #141414, #0f0f0f);
+      border: 1px solid rgba(201,165,53,0.12);
+      border-radius: 4px;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .review-card:hover {
+      border-color: rgba(201,165,53,0.3);
+      transform: translateY(-4px);
+    }
+
+    /* ── Hours table ── */
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row.today { color: #c9a535; }
+
+    /* ── Gallery ── */
+    .gallery-item {
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-item img,
+    .gallery-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .gallery-item:hover img,
+    .gallery-item:hover video {
+      transform: scale(1.05);
+    }
+    .gallery-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .gallery-item:hover .overlay { opacity: 1; }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── Ambient glow behind sections ── */
+    .glow-gold {
+      position: relative;
+    }
+    .glow-gold::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse, rgba(201,165,53,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── Nav mobile menu ── */
+    #mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    #mobile-menu.open {
+      max-height: 400px;
+    }
+
+    /* ── Tagline under hero headline ── */
+    .hero-sub {
+      letter-spacing: 0.3em;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ── Logo image ── */
+    .logo-img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* ── Map embed ── */
+    .map-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .map-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(201,165,53,0.2);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════ NAVBAR ═══ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-6 py-4" style="background: transparent;">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <a href="https://www.instagram.com/ifreshcuts1070/" target="_blank" rel="noopener" class="flex items-center gap-3">
+      <img src="logo.jpg" alt="iFresh Cuts" class="logo-img rounded" />
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="hidden md:flex items-center gap-8">
+      <li><a href="#about"    class="text-sm font-medium text-white/70 hover:text-gold-400 transition-colors tracking-wider uppercase text-xs">About</a></li>
+      <li><a href="#services" class="text-sm font-medium text-white/70 hover:text-gold-400 transition-colors tracking-wider uppercase text-xs">Services</a></li>
+      <li><a href="#gallery"  class="text-sm font-medium text-white/70 hover:text-gold-400 transition-colors tracking-wider uppercase text-xs">Gallery</a></li>
+      <li><a href="#reviews"  class="text-sm font-medium text-white/70 hover:text-gold-400 transition-colors tracking-wider uppercase text-xs">Reviews</a></li>
+      <li><a href="#contact"  class="text-sm font-medium text-white/70 hover:text-gold-400 transition-colors tracking-wider uppercase text-xs">Contact</a></li>
+      <li><a href="tel:9053819836" class="btn-gold text-xs py-3 px-6">(905) 381-9836</a></li>
+    </ul>
+
+    <!-- Mobile hamburger -->
+    <button id="menu-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+      <span class="block w-6 h-0.5 bg-gold-400 transition-all"></span>
+      <span class="block w-4 h-0.5 bg-gold-400 transition-all ml-auto"></span>
+      <span class="block w-6 h-0.5 bg-gold-400 transition-all"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden" style="background: rgba(10,10,10,0.97); border-top: 1px solid rgba(201,165,53,0.15); margin-top: 1rem;">
+    <ul class="flex flex-col px-6 py-4 gap-4">
+      <li><a href="#about"    class="block text-sm tracking-widest uppercase text-white/70 hover:text-gold-400 transition-colors" onclick="closeMobileMenu()">About</a></li>
+      <li><a href="#services" class="block text-sm tracking-widest uppercase text-white/70 hover:text-gold-400 transition-colors" onclick="closeMobileMenu()">Services</a></li>
+      <li><a href="#gallery"  class="block text-sm tracking-widest uppercase text-white/70 hover:text-gold-400 transition-colors" onclick="closeMobileMenu()">Gallery</a></li>
+      <li><a href="#reviews"  class="block text-sm tracking-widest uppercase text-white/70 hover:text-gold-400 transition-colors" onclick="closeMobileMenu()">Reviews</a></li>
+      <li><a href="#contact"  class="block text-sm tracking-widest uppercase text-white/70 hover:text-gold-400 transition-colors" onclick="closeMobileMenu()">Contact</a></li>
+      <li><a href="tel:9053819836" class="btn-gold text-center text-xs py-3">(905) 381-9836</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════ HERO ═══ -->
+<section id="hero" class="hero-wrap">
+
+  <!-- Three vertical video panels -->
+  <div class="video-panel">
+    <div class="video-col">
+      <video id="v1" autoplay muted playsinline></video>
+    </div>
+    <div class="video-col">
+      <video id="v2" autoplay muted playsinline></video>
+    </div>
+    <div class="video-col">
+      <video id="v3" autoplay muted playsinline></video>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div class="hero-overlay"></div>
+
+  <!-- Content -->
+  <div class="hero-content">
+    <!-- Top eyebrow -->
+    <p class="hero-sub mb-6 reveal">Hamilton · Ontario</p>
+
+    <!-- Logo -->
+    <div class="mb-6 reveal reveal-delay-1">
+      <img src="logo.jpg" alt="iFresh Cuts" style="height: 90px; width: auto; object-fit: contain; filter: drop-shadow(0 0 24px rgba(201,165,53,0.6));" />
+    </div>
+
+    <!-- Main headline -->
+    <h1 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none mb-4 reveal reveal-delay-2" style="text-shadow: 0 4px 32px rgba(0,0,0,0.8);">
+      <span class="gold-shimmer">Precision</span><br/>
+      <span class="text-white">Cuts.</span>&nbsp;<span class="gold-shimmer">Sharp</span><br/>
+      <span class="text-white">Style.</span>
+    </h1>
+
+    <!-- Sub-headline -->
+    <p class="text-white/60 text-sm sm:text-base font-light tracking-widest uppercase mb-10 reveal reveal-delay-3">
+      Hamilton's Premier Barbershop
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row items-center gap-4 reveal reveal-delay-4">
+      <a href="#contact" class="btn-gold">Book Your Cut</a>
+      <a href="tel:9053819836" class="btn-outline">(905) 381-9836</a>
+    </div>
+
+    <!-- Walk-in note -->
+    <p class="mt-8 text-white/40 text-xs tracking-widest uppercase reveal reveal-delay-4">Walk-ins &amp; Appointments Welcome</p>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-50">
+    <span class="text-white/40 text-xs tracking-widest uppercase">Scroll</span>
+    <div style="width:1px; height:40px; background: linear-gradient(to bottom, rgba(201,165,53,0.6), transparent);"></div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════ GOLD BAR ═══ -->
+<div style="background: linear-gradient(90deg, #0a0a0a, #161616, #0a0a0a); border-top: 1px solid rgba(201,165,53,0.2); border-bottom: 1px solid rgba(201,165,53,0.2);">
+  <div class="max-w-6xl mx-auto px-6 py-5 flex flex-wrap justify-center md:justify-between items-center gap-4 text-xs tracking-widest uppercase text-white/40">
+    <span class="flex items-center gap-2"><span class="text-gold-500">✦</span> Fades &amp; Tapers</span>
+    <span class="hidden md:block" style="color: rgba(201,165,53,0.3);">|</span>
+    <span class="flex items-center gap-2"><span class="text-gold-500">✦</span> Beard Detailing</span>
+    <span class="hidden md:block" style="color: rgba(201,165,53,0.3);">|</span>
+    <span class="flex items-center gap-2"><span class="text-gold-500">✦</span> Hot Towel Shaves</span>
+    <span class="hidden md:block" style="color: rgba(201,165,53,0.3);">|</span>
+    <span class="flex items-center gap-2"><span class="text-gold-500">✦</span> Line-Ups &amp; Designs</span>
+    <span class="hidden md:block" style="color: rgba(201,165,53,0.3);">|</span>
+    <span class="flex items-center gap-2"><span class="text-gold-500">✦</span> Kids Cuts</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════ ABOUT ═══ -->
+<section id="about" class="glow-gold relative py-28 px-6">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+
+      <!-- Left: text -->
+      <div>
+        <p class="section-label mb-4 reveal">About iFresh Cuts</p>
+        <div class="gold-line mb-8 reveal" style="margin-left: 0;"></div>
+
+        <h2 class="section-title text-4xl sm:text-5xl text-white leading-tight mb-8 reveal reveal-delay-1">
+          Where Every Cut<br/>
+          <span class="gold-text">Tells a Story.</span>
+        </h2>
+
+        <p class="text-white/60 text-base leading-relaxed mb-6 reveal reveal-delay-2">
+          At iFresh Cuts, we believe a great cut isn't just grooming. It's a statement. Nestled in Hamilton, Ontario, our shop blends old-school barbering tradition with modern precision technique.
+        </p>
+
+        <p class="text-white/60 text-base leading-relaxed mb-10 reveal reveal-delay-3">
+          From sharp fades and clean line-ups to sculpted beards and hot towel shaves, every service is delivered with attention to detail that keeps our clients coming back. Walk-ins always welcome.
+        </p>
+
+        <div class="grid grid-cols-2 gap-6 reveal reveal-delay-4">
+          <div class="border-l-2 border-gold-500 pl-4">
+            <p class="font-display text-3xl font-bold text-white">5★</p>
+            <p class="text-white/40 text-xs tracking-widest uppercase mt-1">Google Rated</p>
+          </div>
+          <div class="border-l-2 border-gold-500 pl-4">
+            <p class="font-display text-3xl font-bold text-white">10+</p>
+            <p class="text-white/40 text-xs tracking-widest uppercase mt-1">Years Crafting</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: shop image -->
+      <div class="reveal reveal-delay-2" style="position:relative;">
+        <div style="position:absolute; top:-16px; left:-16px; right:16px; bottom:16px; border: 1px solid rgba(201,165,53,0.25); pointer-events:none; z-index:0;"></div>
+        <div style="position:relative; z-index:1; overflow:hidden;">
+          <img src="shop-interior.jpg"
+               alt="iFresh Cuts Interior"
+               style="width:100%; height:380px; object-fit:cover; display:block; filter: contrast(1.05) brightness(0.9);" />
+          <div style="position:absolute; inset:0; background: linear-gradient(to bottom, transparent 60%, rgba(10,10,10,0.5));"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════ SERVICES ═══ -->
+<section id="services" class="relative py-28 px-6" style="background: #0d0d0d;">
+  <div class="gold-line-full mb-0" style="position:absolute;top:0;left:0;right:0;"></div>
+
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <p class="section-label mb-4 reveal">What We Do</p>
+      <div class="gold-line mb-8 reveal"></div>
+      <h2 class="section-title text-4xl sm:text-5xl text-white reveal reveal-delay-1">
+        Services &amp; <span class="gold-text">Pricing</span>
+      </h2>
+      <p class="text-white/40 text-sm mt-4 max-w-md mx-auto reveal reveal-delay-2">Premium cuts at fair prices. Every service delivered with craft and care.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+
+      <!-- Service: Men's Haircut -->
+      <div class="service-card p-7 reveal">
+        <div class="text-3xl mb-4">✂️</div>
+        <h3 class="font-display text-xl text-white font-semibold mb-2">Men's Haircut</h3>
+        <p class="text-white/40 text-sm mb-6">Full cut, style &amp; finish</p>
+        <p class="gold-text font-display text-3xl font-bold">$25</p>
+      </div>
+
+      <!-- Service: Beard Trim -->
+      <div class="service-card p-7 reveal reveal-delay-1">
+        <div class="text-3xl mb-4">🪒</div>
+        <h3 class="font-display text-xl text-white font-semibold mb-2">Beard Trim</h3>
+        <p class="text-white/40 text-sm mb-6">Shape, define &amp; edge</p>
+        <p class="gold-text font-display text-3xl font-bold">$15</p>
+      </div>
+
+      <!-- Service: Cut + Beard -->
+      <div class="service-card p-7 reveal reveal-delay-2">
+        <div class="text-3xl mb-4">👑</div>
+        <h3 class="font-display text-xl text-white font-semibold mb-2">Cut + Beard</h3>
+        <p class="text-white/40 text-sm mb-6">Full grooming package</p>
+        <p class="gold-text font-display text-3xl font-bold">$35</p>
+      </div>
+
+      <!-- Service: Kids Cut -->
+      <div class="service-card p-7 reveal reveal-delay-3">
+        <div class="text-3xl mb-4">⭐</div>
+        <h3 class="font-display text-xl text-white font-semibold mb-2">Kids Cut</h3>
+        <p class="text-white/40 text-sm mb-6">Under 12 years old</p>
+        <p class="gold-text font-display text-3xl font-bold">$20</p>
+      </div>
+
+      <!-- Service: Hot Towel Shave -->
+      <div class="service-card p-7 reveal">
+        <div class="text-3xl mb-4">🔥</div>
+        <h3 class="font-display text-xl text-white font-semibold mb-2">Hot Towel Shave</h3>
+        <p class="text-white/40 text-sm mb-6">Classic straight razor experience</p>
+        <p class="gold-text font-display text-3xl font-bold">$20</p>
+      </div>
+
+      <!-- Service: Line-Up -->
+      <div class="service-card p-7 reveal reveal-delay-1">
+        <div class="text-3xl mb-4">📐</div>
+        <h3 class="font-display text-xl text-white font-semibold mb-2">Line-Up</h3>
+        <p class="text-white/40 text-sm mb-6">Crisp edges &amp; clean lines</p>
+        <p class="gold-text font-display text-3xl font-bold">$15</p>
+      </div>
+
+      <!-- Service: Hair Design -->
+      <div class="service-card p-7 reveal reveal-delay-2">
+        <div class="text-3xl mb-4">🎨</div>
+        <h3 class="font-display text-xl text-white font-semibold mb-2">Hair Design</h3>
+        <p class="text-white/40 text-sm mb-6">Custom artwork &amp; patterns</p>
+        <p class="gold-text font-display text-3xl font-bold">+$10</p>
+      </div>
+
+      <!-- CTA card -->
+      <div class="service-card p-7 reveal reveal-delay-3 flex flex-col items-center justify-center text-center"
+           style="background: linear-gradient(145deg, #1a1505, #100e02); border-color: rgba(201,165,53,0.3);">
+        <div class="gold-line mb-6"></div>
+        <p class="text-white/60 text-sm mb-5 leading-relaxed">Walk-ins welcome.<br/>Appointments available.</p>
+        <a href="tel:9053819836" class="btn-gold text-xs py-3 px-5">(905) 381-9836</a>
+        <div class="gold-line mt-6"></div>
+      </div>
+
+    </div>
+  </div>
+  <div class="gold-line-full mt-0" style="position:absolute;bottom:0;left:0;right:0;"></div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════ GALLERY ═══ -->
+<section id="gallery" class="py-28 px-6 glow-gold relative">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16">
+      <p class="section-label mb-4 reveal">The Experience</p>
+      <div class="gold-line mb-8 reveal"></div>
+      <h2 class="section-title text-4xl sm:text-5xl text-white reveal reveal-delay-1">
+        Inside <span class="gold-text">iFresh Cuts</span>
+      </h2>
+    </div>
+
+    <!-- Gallery grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+
+      <!-- Shop interior — spans 2 columns on desktop -->
+      <div class="gallery-item md:col-span-2 reveal" style="height: 380px; border: 1px solid rgba(201,165,53,0.12);">
+        <img src="shop-interior.jpg" alt="iFresh Cuts Interior" />
+        <div class="overlay"></div>
+      </div>
+
+      <!-- Video 1 -->
+      <div class="gallery-item reveal reveal-delay-1" style="height: 380px; border: 1px solid rgba(201,165,53,0.12);">
+        <video id="gv1" autoplay muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>
+        <div class="overlay"></div>
+        <div style="position:absolute;bottom:12px;left:12px;z-index:2;">
+          <span style="background:rgba(10,10,10,0.7);border:1px solid rgba(201,165,53,0.3);padding:4px 10px;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:#c9a535;">Precision</span>
+        </div>
+      </div>
+
+      <!-- Video 2 -->
+      <div class="gallery-item reveal reveal-delay-2" style="height: 260px; border: 1px solid rgba(201,165,53,0.12);">
+        <video id="gv2" autoplay muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>
+        <div class="overlay"></div>
+        <div style="position:absolute;bottom:12px;left:12px;z-index:2;">
+          <span style="background:rgba(10,10,10,0.7);border:1px solid rgba(201,165,53,0.3);padding:4px 10px;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:#c9a535;">Style</span>
+        </div>
+      </div>
+
+      <!-- Video 3 -->
+      <div class="gallery-item reveal reveal-delay-3" style="height: 260px; border: 1px solid rgba(201,165,53,0.12);">
+        <video id="gv3" autoplay muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>
+        <div class="overlay"></div>
+        <div style="position:absolute;bottom:12px;left:12px;z-index:2;">
+          <span style="background:rgba(10,10,10,0.7);border:1px solid rgba(201,165,53,0.3);padding:4px 10px;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:#c9a535;">Craft</span>
+        </div>
+      </div>
+
+      <!-- Text tile -->
+      <div class="reveal reveal-delay-4 flex items-center justify-center text-center p-8"
+           style="height: 260px; background: linear-gradient(145deg, #141404, #0f0e02); border: 1px solid rgba(201,165,53,0.25);">
+        <div>
+          <p class="gold-text font-display text-2xl font-bold mb-3">"The shop speaks for itself."</p>
+          <p class="text-white/40 text-xs tracking-widest uppercase">Hamilton, ON</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════ REVIEWS ═══ -->
+<section id="reviews" class="py-28 px-6 relative" style="background: #0d0d0d;">
+  <div class="gold-line-full" style="position:absolute;top:0;left:0;right:0;"></div>
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16">
+      <p class="section-label mb-4 reveal">What They Say</p>
+      <div class="gold-line mb-8 reveal"></div>
+      <h2 class="section-title text-4xl sm:text-5xl text-white reveal reveal-delay-1">
+        Client <span class="gold-text">Reviews</span>
+      </h2>
+      <!-- Stars -->
+      <div class="flex justify-center gap-1 mt-6 reveal reveal-delay-2">
+        <span class="text-gold-400 text-2xl">★★★★★</span>
+      </div>
+      <p class="text-white/40 text-sm mt-2 reveal reveal-delay-2">5.0 · Google Reviews</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <div class="review-card p-8 reveal">
+        <div class="flex gap-1 mb-5">
+          <span class="text-gold-400">★★★★★</span>
+        </div>
+        <p class="text-white/75 text-base leading-relaxed mb-8 font-light italic">
+          "One of the best barber shops in Hamilton if not the best. Ali always does great work and makes sure you're happy before walking out."
+        </p>
+        <div class="flex items-center gap-3">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#c9a535,#5e4b0e);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;color:#0a0a0a;">M</div>
+          <div>
+            <p class="text-white text-sm font-semibold">Michael R.</p>
+            <p class="text-white/30 text-xs tracking-wide">Hamilton, ON</p>
+          </div>
+          <div class="ml-auto">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card p-8 reveal reveal-delay-1" style="border-color: rgba(201,165,53,0.3); background: linear-gradient(145deg, #161404, #0f0e02);">
+        <div class="flex gap-1 mb-5">
+          <span class="text-gold-400">★★★★★</span>
+        </div>
+        <p class="text-white/75 text-base leading-relaxed mb-8 font-light italic">
+          "These barbers are top tier! My son wanted a completely new style, and they did not disappoint! Absolutely amazing work."
+        </p>
+        <div class="flex items-center gap-3">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#c9a535,#5e4b0e);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;color:#0a0a0a;">S</div>
+          <div>
+            <p class="text-white text-sm font-semibold">Sarah K.</p>
+            <p class="text-white/30 text-xs tracking-wide">Hamilton, ON</p>
+          </div>
+          <div class="ml-auto">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card p-8 reveal reveal-delay-2">
+        <div class="flex gap-1 mb-5">
+          <span class="text-gold-400">★★★★★</span>
+        </div>
+        <p class="text-white/75 text-base leading-relaxed mb-8 font-light italic">
+          "I prefer to get my hair cut here over any other place. They don't disappoint. Every single time, perfection."
+        </p>
+        <div class="flex items-center gap-3">
+          <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#c9a535,#5e4b0e);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;color:#0a0a0a;">D</div>
+          <div>
+            <p class="text-white text-sm font-semibold">David T.</p>
+            <p class="text-white/30 text-xs tracking-wide">Hamilton, ON</p>
+          </div>
+          <div class="ml-auto">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA after reviews -->
+    <div class="text-center mt-14 reveal">
+      <a href="tel:9053819836" class="btn-gold">Call to Book · (905) 381-9836</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════ CONTACT ═══ -->
+<section id="contact" class="py-28 px-6 glow-gold relative">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16">
+      <p class="section-label mb-4 reveal">Find Us</p>
+      <div class="gold-line mb-8 reveal"></div>
+      <h2 class="section-title text-4xl sm:text-5xl text-white reveal reveal-delay-1">
+        Location &amp; <span class="gold-text">Hours</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-10 items-start">
+
+      <!-- Left: info -->
+      <div class="reveal">
+        <!-- Address -->
+        <div class="mb-10">
+          <p class="section-label mb-3">Address</p>
+          <p class="text-white text-lg font-medium">1070 Stone Church Rd E</p>
+          <p class="text-white/60">Hamilton, ON L8W 3L3</p>
+          <a href="https://maps.google.com/?q=1070+Stone+Church+Rd+E+Hamilton+ON"
+             target="_blank"
+             class="inline-flex items-center gap-2 mt-3 text-gold-400 text-sm hover:text-gold-300 transition-colors">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Get Directions
+          </a>
+        </div>
+
+        <!-- Phone + Instagram -->
+        <div class="mb-10">
+          <p class="section-label mb-3">Phone</p>
+          <a href="tel:9053819836" class="text-white text-2xl font-display font-bold hover:text-gold-400 transition-colors">(905) 381-9836</a>
+          <div class="mt-4">
+            <a href="https://www.instagram.com/ifreshcuts1070/" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 text-gold-400 text-sm hover:text-gold-300 transition-colors">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              @ifreshcuts1070
+            </a>
+          </div>
+        </div>
+
+        <!-- Hours -->
+        <div>
+          <p class="section-label mb-4">Hours of Operation</p>
+          <div class="hours-row">
+            <span class="text-white/50 text-sm">Monday</span>
+            <span class="text-white/70 text-sm font-medium">11:00 AM – 5:00 PM</span>
+          </div>
+          <div class="hours-row">
+            <span class="text-white/50 text-sm">Tuesday</span>
+            <span class="text-white/70 text-sm font-medium">10:00 AM – 7:00 PM</span>
+          </div>
+          <div class="hours-row today">
+            <span class="text-sm font-semibold">Wednesday</span>
+            <span class="text-sm font-semibold">10:00 AM – 7:00 PM</span>
+          </div>
+          <div class="hours-row">
+            <span class="text-white/50 text-sm">Thursday</span>
+            <span class="text-white/70 text-sm font-medium">10:00 AM – 9:00 PM</span>
+          </div>
+          <div class="hours-row">
+            <span class="text-white/50 text-sm">Friday</span>
+            <span class="text-white/70 text-sm font-medium">10:00 AM – 9:00 PM</span>
+          </div>
+          <div class="hours-row">
+            <span class="text-white/50 text-sm">Saturday</span>
+            <span class="text-white/70 text-sm font-medium">10:00 AM – 7:00 PM</span>
+          </div>
+          <div class="hours-row">
+            <span class="text-white/50 text-sm">Sunday</span>
+            <span class="text-white/40 text-sm">Closed</span>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-10 flex gap-4">
+          <a href="tel:9053819836" class="btn-gold">Call Now</a>
+          <a href="https://maps.google.com/?q=1070+Stone+Church+Rd+E+Hamilton+ON" target="_blank" class="btn-outline">Get Directions</a>
+        </div>
+      </div>
+
+      <!-- Right: Map -->
+      <div class="map-wrap reveal reveal-delay-2" style="height: 500px; border-radius: 2px;">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2904.7!2d-79.8071!3d43.2185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882c9a7d5c5a8e2b%3A0x7b72f3c7d14e1234!2s1070%20Stone%20Church%20Rd%20E%2C%20Hamilton%2C%20ON%20L8W%203L3!5e0!3m2!1sen!2sca!4v1710000000000"
+          width="100%"
+          height="100%"
+          style="border:0; display:block; filter: grayscale(1) invert(0.9) contrast(0.85) sepia(0.4);"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="iFresh Cuts Location">
+        </iframe>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════ FOOTER ═══ -->
+<footer style="background: #080808; border-top: 1px solid rgba(201,165,53,0.15);">
+
+  <!-- Top footer -->
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+
+      <!-- Brand -->
+      <div>
+        <a href="https://www.instagram.com/ifreshcuts1070/" target="_blank" rel="noopener">
+          <img src="logo.jpg" alt="iFresh Cuts" style="height:60px;width:auto;object-fit:contain;margin-bottom:1.25rem;" />
+        </a>
+        <p class="text-white/40 text-sm leading-relaxed max-w-xs">
+          Hamilton's premier barbershop. Precision cuts, sharp style, exceptional service.
+        </p>
+        <div class="gold-line mt-6" style="margin-left:0;"></div>
+        <!-- Social -->
+        <div class="flex gap-4 mt-6">
+          <a href="https://www.instagram.com/ifreshcuts1070/" target="_blank" rel="noopener"
+             style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid rgba(201,165,53,0.3);color:#c9a535;transition:all 0.3s ease;"
+             onmouseover="this.style.background='rgba(201,165,53,0.1)';this.style.borderColor='#c9a535'"
+             onmouseout="this.style.background='transparent';this.style.borderColor='rgba(201,165,53,0.3)'"
+             aria-label="iFresh Cuts on Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div>
+        <p class="section-label mb-5">Navigate</p>
+        <ul class="space-y-3">
+          <li><a href="#about"    class="text-white/50 hover:text-gold-400 text-sm transition-colors tracking-wide">About</a></li>
+          <li><a href="#services" class="text-white/50 hover:text-gold-400 text-sm transition-colors tracking-wide">Services &amp; Pricing</a></li>
+          <li><a href="#gallery"  class="text-white/50 hover:text-gold-400 text-sm transition-colors tracking-wide">Gallery</a></li>
+          <li><a href="#reviews"  class="text-white/50 hover:text-gold-400 text-sm transition-colors tracking-wide">Reviews</a></li>
+          <li><a href="#contact"  class="text-white/50 hover:text-gold-400 text-sm transition-colors tracking-wide">Location &amp; Hours</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <p class="section-label mb-5">Contact</p>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-2">
+            <span class="text-gold-500 mt-0.5">📍</span>
+            <span class="text-white/50 text-sm">1070 Stone Church Rd E<br/>Hamilton, ON L8W 3L3</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-gold-500">📞</span>
+            <a href="tel:9053819836" class="text-white/50 hover:text-gold-400 text-sm transition-colors">(905) 381-9836</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-gold-500">📸</span>
+            <a href="https://www.instagram.com/ifreshcuts1070/" target="_blank" rel="noopener" class="text-white/50 hover:text-gold-400 text-sm transition-colors">@ifreshcuts1070</a>
+          </li>
+          <li class="flex items-start gap-2 mt-4">
+            <span class="text-gold-500 mt-0.5">🕐</span>
+            <span class="text-white/40 text-xs leading-relaxed">Mon 11–5 · Tue–Wed 10–7<br/>Thu–Fri 10–9 · Sat 10–7<br/>Sun Closed</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div style="border-top: 1px solid rgba(255,255,255,0.05);">
+    <div class="max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-white/25 text-xs">© 2026 iFresh Cuts. All rights reserved.</p>
+      <p class="text-white/25 text-xs">
+        Website by <a href="https://whitelinedigital.dev/" target="_blank" rel="noopener" class="text-gold-600 hover:text-gold-400 transition-colors">WhiteLine Digital</a>
+      </p>
+    </div>
+  </div>
+
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════ JS ═══ -->
+<script>
+  // ── Video sources (URL-encoded for emoji/special char filenames) ──
+  const videos = [
+    "0313.mov",
+    "A%20clean%20look%20never%20goes%20out%20of%20style.Walk-ins%20%26%20appointments%20welcome%F0%9F%93%9E%20%28905%29%20381-9836%F0%9F%93%8D%201070%20Sto.mp4",
+    "Your%20cut%20should%20speak%20before%20you%20do.Fades.%20Line-ups.%20Beard%20detail.%20Done%20right.Walk-ins%20%26%20appoint.mp4"
+  ];
+
+  // ── Seamless loop via double-buffer crossfade ──
+  // Two video elements per slot: one plays while the other preloads at t=0.
+  // When the active one nears its end, we crossfade to the standby and swap.
+  function seamlessLoop(vid, src) {
+    const parent = vid.parentElement;
+    const inlineStyle = vid.getAttribute('style') || '';
+
+    function makeVid(zIdx, opacity) {
+      const v = document.createElement('video');
+      v.src = src;
+      v.muted = true;
+      v.playsInline = true;
+      v.preload = 'auto';
+      v.setAttribute('style',
+        inlineStyle +
+        ';position:absolute;inset:0;width:100%;height:100%;object-fit:cover;' +
+        'z-index:' + zIdx + ';opacity:' + opacity + ';transition:none;'
+      );
+      return v;
+    }
+
+    if (getComputedStyle(parent).position === 'static') {
+      parent.style.position = 'relative';
+    }
+
+    // Active lives at z-index:2 (on top), standby at z-index:1 (below, hidden)
+    const vA = makeVid(2, 1);   // active — starts playing, fully visible
+    const vB = makeVid(1, 0);   // standby — below, invisible
+    vid.replaceWith(vA);
+    parent.appendChild(vB);
+
+    let active = vA, standby = vB;
+    let swapping = false;
+    const TRIGGER = 3.5;    // seconds before end to start swap
+    const FADE_MS = 900;    // standby fade-in duration (ms)
+    const SETTLE  = 960;    // after fade, cleanup old active
+
+    vA.play().catch(() => {});
+
+    // Prime standby: seek to start, decode first frame, keep below active
+    function primeStandby(v) {
+      v.style.transition = 'none';
+      v.style.opacity    = '0';
+      v.style.zIndex     = '1';   // always BELOW active (z-index:2)
+      v.currentTime      = 0.1;  // skip any black first frame
+      v.play().then(() => v.pause()).catch(() => {});
+    }
+    vA.addEventListener('canplaythrough', () => primeStandby(vB), { once: true });
+
+    setInterval(() => {
+      if (swapping || !active.duration) return;
+      if (active.currentTime >= active.duration - TRIGGER) {
+        swapping = true;
+
+        // Raise standby ABOVE active (z-index:3 > active z-index:2), keep hidden
+        standby.style.zIndex     = '3';
+        standby.style.transition = 'none';
+        standby.style.opacity    = '0';
+        // Active stays at z-index:2, opacity:1 — untouched while visible
+
+        standby.currentTime = 0.1;  // skip black first frame
+        standby.play().then(() => {
+          // Standby is playing — fade it in over the top of active
+          requestAnimationFrame(() => {
+            standby.style.transition = `opacity ${FADE_MS}ms ease`;
+            standby.style.opacity    = '1';
+          });
+
+          setTimeout(() => {
+            // Standby fully opaque — now safe to demote old active
+            active.pause();
+            active.currentTime = 0;
+            active.style.zIndex     = '1';   // drop below
+            active.style.transition = 'none';
+            active.style.opacity    = '0';   // hide
+
+            // Normalize new active to z-index:2
+            standby.style.zIndex = '2';
+
+            [active, standby] = [standby, active];
+            swapping = false;
+            primeStandby(standby);  // sets standby to z-index:1, opacity:0
+          }, SETTLE);
+        }).catch(() => { swapping = false; });
+      }
+    }, 200);
+  }
+
+  // Hero videos
+  seamlessLoop(document.getElementById('v1'), videos[0]);
+  seamlessLoop(document.getElementById('v2'), videos[1]);
+  seamlessLoop(document.getElementById('v3'), videos[2]);
+
+  // Gallery videos
+  seamlessLoop(document.getElementById('gv1'), videos[0]);
+  seamlessLoop(document.getElementById('gv2'), videos[1]);
+  seamlessLoop(document.getElementById('gv3'), videos[2]);
+
+
+  // ── Navbar scroll effect ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  }, { passive: true });
+
+
+  // ── Mobile menu ──
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+  }
+
+
+  // ── Scroll reveal ──
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(el => revealObserver.observe(el));
+
+
+  // ── Trigger hero reveals on load ──
+  window.addEventListener('load', () => {
+    document.querySelectorAll('#hero .reveal').forEach(el => {
+      setTimeout(() => el.classList.add('visible'), 200);
+    });
+  });
+
+
+  // ── Highlight today's hours ──
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const today = days[new Date().getDay()];
+  document.querySelectorAll('.hours-row').forEach(row => {
+    const label = row.querySelector('span:first-child');
+    if (label && label.textContent.trim() === today) {
+      row.classList.add('today');
+      // also mark as open/closed
+      const timeSpan = row.querySelector('span:last-child');
+      if (timeSpan && timeSpan.textContent !== 'Closed') {
+        const badge = document.createElement('span');
+        badge.textContent = 'Today';
+        badge.style.cssText = 'margin-left:8px;background:rgba(201,165,53,0.15);color:#c9a535;font-size:0.65rem;padding:1px 7px;letter-spacing:0.1em;text-transform:uppercase;';
+        label.appendChild(badge);
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
